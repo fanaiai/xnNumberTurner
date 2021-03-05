@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="fcolorpicker.css">-->
+    <style>
+        body{
+            background: #eee;
+        }
+        #colorpicker{
+            /*position: fixed;*/
+            /*right: 0;*/
+            /*margin-top: 100px;*/
+            border: 1px solid #fff;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <a id="update">更新数字</a>
+    </div>
+    <div class="container"></div>
+</body>
+<script src="./dist/xnnumberturner.min.js"></script>
+<script>
+    var turner=new XNNumberTuner(document.querySelector(".container"),{
+        number:4526313
+    })
+    document.querySelector("#update").addEventListener("click",e=>{
+        var newNumber=9089709;
+        turner.updateNumber(newNumber)
+    })
+</script>
+</html>
