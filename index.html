@@ -8,29 +8,123 @@
         body{
             background: #eee;
         }
-        #colorpicker{
-            /*position: fixed;*/
-            /*right: 0;*/
-            /*margin-top: 100px;*/
-            border: 1px solid #fff;
-            display: inline-block;
+        .container>div{
+            margin: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+        }
+        .container>div a{
+            cursor: pointer;
+            color: blue;
+            margin-bottom: 10px;
+            display: block;
         }
     </style>
 </head>
 <body>
-    <div>
-        <a id="update">更新数字</a>
+    <div class="container">
+        <h3>仙女座-数字翻转动效</h3>
+        <div>
+            <a class="update" data-key="linerUp">linerUp-更新数字</a>
+            <div class="linerUp"></div>
+        </div>
+        <div>
+            <a class="update" data-key="sameTimeUp">sameTimeUp-更新数字</a>
+            <div class="sameTimeUp"></div>
+        </div>
+        <div>
+            <a class="update" data-key="linerChange">linerChange-更新数字</a>
+            <div class="linerChange"></div>
+        </div>
+        <div>
+            <a class="update" data-key="sameTimeChange">sameTimeChange-更新数字</a>
+            <div class="sameTimeChange"></div>
+        </div>
+        <div>
+            <a class="update" data-key="easyChange">easyChange-更新数字</a>
+            <div class="easyChange"></div>
+        </div>
     </div>
-    <div class="container"></div>
 </body>
 <script src="./dist/xnnumberturner.min.js"></script>
 <script>
-    var turner=new XNNumberTuner(document.querySelector(".container"),{
-        number:4526313
+    var linerUp=new XNNumberTuner(document.querySelector(".linerUp"),{
+        type:'linerUp',//
+        // linerUp：匀速向上翻转，
+        // sameTimeUp：总时间相同向上翻转，
+        // linerChange:每个位数匀速数字变化，
+        // sameTimeChange:总时长相同数字变化,
+        // easyChange:普通从最小值向上变
+        animate:{
+            speedTimeLength: 2,
+            sleepTime: 10,
+            totalTime: 2000,//总时长
+        },
+        number:'89,563'
     })
-    document.querySelector("#update").addEventListener("click",e=>{
-        var newNumber=9089709;
-        turner.updateNumber(newNumber)
+    var sameTimeUp=new XNNumberTuner(document.querySelector(".sameTimeUp"),{
+        type:'sameTimeUp',//
+        // linerUp：匀速向上翻转，
+        // sameTimeUp：总时间相同向上翻转，
+        // linerChange:每个位数匀速数字变化，
+        // sameTimeChange:总时长相同数字变化,
+        // easyChange:普通从最小值向上变
+        animate:{
+            speedTimeLength: 2,
+            sleepTime: 10,
+            totalTime: 2000,//总时长
+        },
+        number:'89,563'
     })
+    var linerChange=new XNNumberTuner(document.querySelector(".linerChange"),{
+        type:'linerChange',//
+        // linerUp：匀速向上翻转，
+        // sameTimeUp：总时间相同向上翻转，
+        // linerChange:每个位数匀速数字变化，
+        // sameTimeChange:总时长相同数字变化,
+        // easyChange:普通从最小值向上变
+        animate:{
+            speedTimeLength: 2,
+            sleepTime: 10,
+            totalTime: 2000,//总时长
+        },
+        number:'89,563'
+    })
+    var sameTimeChange=new XNNumberTuner(document.querySelector(".sameTimeChange"),{
+        type:'sameTimeChange',//
+        // linerUp：匀速向上翻转，
+        // sameTimeUp：总时间相同向上翻转，
+        // linerChange:每个位数匀速数字变化，
+        // sameTimeChange:总时长相同数字变化,
+        // easyChange:普通从最小值向上变
+        animate:{
+            speedTimeLength: 2,
+            sleepTime: 10,
+            totalTime: 2000,//总时长
+        },
+        number:'89,563'
+    })
+    var easyChange=new XNNumberTuner(document.querySelector(".easyChange"),{
+        type:'easyChange',//
+        // linerUp：匀速向上翻转，
+        // sameTimeUp：总时间相同向上翻转，
+        // linerChange:每个位数匀速数字变化，
+        // sameTimeChange:总时长相同数字变化,
+        // easyChange:普通从最小值向上变
+        animate:{
+            speedTimeLength: 2,
+            sleepTime: 10,
+            totalTime: 2000,//总时长
+        },
+        number:'323'
+    })
+    document.querySelectorAll(".update").forEach(ele=>{
+        ele.addEventListener("click",e=>{
+            var newNumber='191,578';
+            var key=e.target.getAttribute('data-key')
+            window[key].updateNumber(newNumber)
+        })
+    })
+
 </script>
 </html>
