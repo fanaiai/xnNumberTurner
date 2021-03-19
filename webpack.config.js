@@ -5,15 +5,16 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-module.exports = {
+module.exports = (env) => {
+    return {
     mode:'development',
     entry: {
-        xncolorpicker:{
+        xnnumberturner:{
             import:'./src/xnnumberturner.js',
         }
     },
     // devtool:'source-map',//追踪错误源码
-    devtool:'eval-source-map',//追踪错误源码
+        devtool: env.production ? 'source-map' : 'eval-source-map',//追踪错误源码
     devServer: {
         contentBase: './dist',
     },
@@ -109,4 +110,4 @@ module.exports = {
             }
         ],
     },
-};
+}};

@@ -118,9 +118,15 @@
         },
         number:'323'
     })
+    var newArry=['91,578','92,987','102,011'];
+    var index=0;
     document.querySelectorAll(".update").forEach(ele=>{
         ele.addEventListener("click",e=>{
-            var newNumber='191,578';
+            var newNumber=newArry[index];
+            index+=1;
+            if(index>newArry.length-1){
+                index=0;
+            }
             var key=e.target.getAttribute('data-key')
             window[key].updateNumber(newNumber)
         })
