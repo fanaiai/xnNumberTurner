@@ -41,6 +41,7 @@ import './xnnumberturner.css'
         this.arry = String(this.option.number).split('').reverse();//最新数组
 
         this.initArry = new Array(this.arry.length);//初始数组
+        this.option.css.height=parseInt(this.option.css.height);
         this.currentNumber = 0;
         this[this.option.type]()
     }
