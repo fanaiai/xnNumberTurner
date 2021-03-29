@@ -25,7 +25,7 @@ import './xnnumberturner.css'
             marginRight: 4,
             borderRadius: 4,
             fontSize: 22,
-            fontFamily: 'fantasy',//unidreamLED
+            fontFamily: '苹方,微软雅黑',//unidreamLED
             color: 'rgb(11 59 235)'
         },
         animate: {
