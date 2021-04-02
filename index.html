@@ -48,70 +48,70 @@
 </body>
 <script src="./dist/xnnumberturner.min.js"></script>
 <script>
-    var linerUp=new XNNumberTuner(document.querySelector(".linerUp"),{"type":"linerUp","animate":{"speedTimeLength":2,"sleepTime":10,"totalTime":2000},"css":{"height":"56","backgroundColor":"#efefef","borderColor":"#125ce9","borderWidth":2,"borderStyle":"solid","backgroundImage":"","backgroundSize":"auto","width":"35","textAlign":"center","marginRight":4,"borderRadius":4,"fontSize":22,"fontFamily":"fantasy","color":"rgba(11,59,235,1)"},"number":3527})
-    var sameTimeUp=new XNNumberTuner(document.querySelector(".sameTimeUp"),{
-        type:'sameTimeUp',//
-        // linerUp：匀速向上翻转，
-        // sameTimeUp：总时间相同向上翻转，
-        // linerChange:每个位数匀速数字变化，
-        // sameTimeChange:总时长相同数字变化,
-        // easyChange:普通从最小值向上变
-        animate:{
-            totalTime: 2000,//总时长
-        },
-        number:'89,563'
-    })
-    var linerChange=new XNNumberTuner(document.querySelector(".linerChange"),{
-        type:'linerChange',//
-        // linerUp：匀速向上翻转，
-        // sameTimeUp：总时间相同向上翻转，
-        // linerChange:每个位数匀速数字变化，
-        // sameTimeChange:总时长相同数字变化,
-        // easyChange:普通从最小值向上变
-        animate:{
-            totalTime: 2000,//总时长
-        },
-        number:'89,563'
-    })
-    var sameTimeChange=new XNNumberTuner(document.querySelector(".sameTimeChange"),{
-        type:'sameTimeChange',//
-        // linerUp：匀速向上翻转，
-        // sameTimeUp：总时间相同向上翻转，
-        // linerChange:每个位数匀速数字变化，
-        // sameTimeChange:总时长相同数字变化,
-        // easyChange:普通从最小值向上变
-        animate:{
-            totalTime: 2000,//总时长
-        },
-        number:'89,563'
-    })
-    var easyChange=new XNNumberTuner(document.querySelector(".easyChange"),{
-        type:'easyChange',//
-        // linerUp：匀速向上翻转，
-        // sameTimeUp：总时间相同向上翻转，
-        // linerChange:每个位数匀速数字变化，
-        // sameTimeChange:总时长相同数字变化,
-        // easyChange:普通从最小值向上变
-        animate:{
-            speedTimeLength: 2,
-            sleepTime: 10,
-            totalTime: 2000,//总时长
-        },
-        number:'323'
-    })
-    var newArry=['91,578','92,987','102,011'];
-    var index=0;
-    document.querySelectorAll(".update").forEach(ele=>{
-        ele.addEventListener("click",e=>{
-            var newNumber=newArry[index];
-            index+=1;
-            if(index>newArry.length-1){
-                index=0;
-            }
-            var key=e.target.getAttribute('data-key')
-            window[key].updateNumber(newNumber)
-        })
-    })
+    var linerUp=new XNNumberTuner(document.querySelector(".linerUp"),{"type":"linerUp","animate":{"speedTimeLength":2000,"sleepTime":1000,"totalTime":2000},"css":{"height":"56","backgroundColor":"#efefef","borderColor":"#125ce9","borderWidth":2,"borderStyle":"solid","backgroundImage":"","backgroundSize":"auto","width":"35","textAlign":"center","marginRight":4,"borderRadius":4,"fontSize":22,"fontFamily":"fantasy","color":"rgba(11,59,235,1)"},"number":9})
+    // var sameTimeUp=new XNNumberTuner(document.querySelector(".sameTimeUp"),{
+    //     type:'sameTimeUp',//
+    //     // linerUp：匀速向上翻转，
+    //     // sameTimeUp：总时间相同向上翻转，
+    //     // linerChange:每个位数匀速数字变化，
+    //     // sameTimeChange:总时长相同数字变化,
+    //     // easyChange:普通从最小值向上变
+    //     animate:{
+    //         totalTime: 2000,//总时长
+    //     },
+    //     number:'9'
+    // })
+    // var linerChange=new XNNumberTuner(document.querySelector(".linerChange"),{
+    //     type:'linerChange',//
+    //     // linerUp：匀速向上翻转，
+    //     // sameTimeUp：总时间相同向上翻转，
+    //     // linerChange:每个位数匀速数字变化，
+    //     // sameTimeChange:总时长相同数字变化,
+    //     // easyChange:普通从最小值向上变
+    //     animate:{
+    //         totalTime: 2000,//总时长
+    //     },
+    //     number:'89,563'
+    // })
+    // var sameTimeChange=new XNNumberTuner(document.querySelector(".sameTimeChange"),{
+    //     type:'sameTimeChange',//
+    //     // linerUp：匀速向上翻转，
+    //     // sameTimeUp：总时间相同向上翻转，
+    //     // linerChange:每个位数匀速数字变化，
+    //     // sameTimeChange:总时长相同数字变化,
+    //     // easyChange:普通从最小值向上变
+    //     animate:{
+    //         totalTime: 2000,//总时长
+    //     },
+    //     number:'89,563'
+    // })
+    // var easyChange=new XNNumberTuner(document.querySelector(".easyChange"),{
+    //     type:'easyChange',//
+    //     // linerUp：匀速向上翻转，
+    //     // sameTimeUp：总时间相同向上翻转，
+    //     // linerChange:每个位数匀速数字变化，
+    //     // sameTimeChange:总时长相同数字变化,
+    //     // easyChange:普通从最小值向上变
+    //     animate:{
+    //         speedTimeLength: 2,
+    //         sleepTime: 10,
+    //         totalTime: 2000,//总时长
+    //     },
+    //     number:'323'
+    // })
+    // var newArry=['91,578','92,987','102,011'];
+    // var index=0;
+    // document.querySelectorAll(".update").forEach(ele=>{
+    //     ele.addEventListener("click",e=>{
+    //         var newNumber=newArry[index];
+    //         index+=1;
+    //         if(index>newArry.length-1){
+    //             index=0;
+    //         }
+    //         var key=e.target.getAttribute('data-key')
+    //         window[key].updateNumber(newNumber)
+    //     })
+    // })
 
 </script>
 </html>

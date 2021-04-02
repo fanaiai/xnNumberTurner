@@ -216,7 +216,8 @@ import './xnnumberturner.css'
             let currentIndex = parseInt(dom.querySelector(".current-number").innerHTML);
             let turnStep = currentIndex - dirnum;
             let dir = turnStep > 0 ? 1 : -1;
-            this[this.option.type + 'turnAnimate'](dom, turnStep, currentIndex, dir, dirnum);
+            let curTime=new Date().getTime();
+            this[this.option.type + 'turnAnimate'](dom, turnStep, currentIndex, dir, dirnum,curTime,curTime);
         },
         sameTimeChangeturnAnimate(dom, currentIndex, dir, dirnum, speed, key) {
             if (currentIndex == dirnum) {
@@ -257,28 +258,62 @@ import './xnnumberturner.css'
                 }
             }, this.option.animate.totalTime / 10)
         },
-        linerUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum) {
-            if (currentIndex == dirnum) {
-                return;
-            }
-            window.setTimeout(() => {
-                let curheight = 0
-                let interval = window.setInterval(() => {
-                    dom.style.top = parseInt(dom.style.top || 0) + dir + 'px';
-                    curheight++;
-                    if (curheight >= this.option.css.height) {
-                        clearInterval(interval)
-                        currentIndex -= dir;
-                        if (currentIndex != dirnum) {
-                            this.linerUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum);
-                        } else {
-                            dom.querySelector(".current-number").classList.remove("current-number");
-                            dom.querySelector(".number" + dirnum).classList.add("current-number")
+        linerUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum,cursleepTime,curTime) {
+            // return;
+            var curHeight=0;
+            var animate1=()=>{
+                if (currentIndex == dirnum) {
+                    return;
+                }
+                console.log(1)
+                var sleepTimeLength=new Date().getTime()-cursleepTime;
+                if(sleepTimeLength>=this.option.animate.sleepTime){
+                    // cursleepTime=new Date().getTime();
+                    var timeLength=new Date().getTime()-curTime;
+                    if(timeLength<this.option.animate.speedTimeLength){
+
+                        var curheight=parseInt(dom.style.top || 0) + dir;
+                        dom.style.top = curheight + 'px';
+                        // console.log(curheight)
+                        curHeight++;
+                        if (curHeight >= this.option.css.height) {
+                            cursleepTime=new Date().getTime();
+                            curTime=new Date().getTime()
+                            curHeight=0;
+                            // clearInterval(interval)
+                            currentIndex -= dir;
+                            if (currentIndex != dirnum) {
+                                // this.linerUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum);
+                            } else {
+                                dom.querySelector(".current-number").classList.remove("current-number");
+                                dom.querySelector(".number" + dirnum).classList.add("current-number");
+                                cancelAnimationFrame(rid)
+                            }
                         }
                     }
-                }, this.option.animate.speedTimeLength)
+                }
+                var rid=requestAnimationFrame(animate1)
+            }
+            animate1()
+            // window.setTimeout(() => {
+            //     let curheight = 0
+            //     let interval = window.setInterval(() => {
+            //         dom.style.top = parseInt(dom.style.top || 0) + dir + 'px';
+            //         curheight++;
+            //         if (curheight >= this.option.css.height) {
+            //             clearInterval(interval)
+            //             currentIndex -= dir;
+            //             if (currentIndex != dirnum) {
+            //                 this.linerUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum);
+            //             } else {
+            //                 dom.querySelector(".current-number").classList.remove("current-number");
+            //                 dom.querySelector(".number" + dirnum).classList.add("current-number")
+            //             }
+            //         }
+            //     }, this.option.animate.speedTimeLength)
+            //
+            // }, this.option.animate.sleepTime)
 
-            }, this.option.animate.sleepTime)
         },
         sameTimeUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum) {
             if (currentIndex == dirnum) {
