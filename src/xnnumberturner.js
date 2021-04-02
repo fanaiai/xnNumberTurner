@@ -259,7 +259,7 @@ import './xnnumberturner.css'
             }, this.option.animate.totalTime / 10)
         },
         linerUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum,cursleepTime,curTime) {
-            // return;
+            return;
             var curHeight=0;
             var animate1=()=>{
                 if (currentIndex == dirnum) {
@@ -269,7 +269,7 @@ import './xnnumberturner.css'
                 var sleepTimeLength=new Date().getTime()-cursleepTime;
                 if(sleepTimeLength>=this.option.animate.sleepTime){
                     // cursleepTime=new Date().getTime();
-                    var timeLength=new Date().getTime()-curTime;
+                    var timeLength=new Date().getTime()-curTime-this.option.animate.sleepTime;
                     if(timeLength<this.option.animate.speedTimeLength){
 
                         var curheight=parseInt(dom.style.top || 0) + dir;
