@@ -43,6 +43,8 @@ import './xnnumberturner.css'
         this.initArry = new Array(this.arry.length);//初始数组
         this.option.css.height=parseInt(this.option.css.height);
         this.currentNumber = 0;
+        this.rids=[];
+        this.eventList={};
         this[this.option.type]()
     }
 
@@ -103,7 +105,26 @@ import './xnnumberturner.css'
         },
         linerUpUpdate() {
             if (this.arry.length == this.lastArry.length) {
+                // for (let i = 0; i < this.arry.length; i++) {
+                //     this.turnNumber(this.arry[i], i)
+                // }
+                // for (let i = 0; i < this.arry.length; i++) {
+                //     this.turnNumber(this.arry[i], i)
+                // }
+
+                this.isrunning=0;
                 for (let i = 0; i < this.arry.length; i++) {
+                    if (!$.isNumber(this.arry[i])) {
+                        continue;
+                    }
+                    else{
+                        this.isrunning++;
+                    }
+                }
+                for (let i = 0; i < this.arry.length; i++) {
+                    if (!$.isNumber(this.arry[i])) {
+                        continue;
+                    }
                     this.turnNumber(this.arry[i], i)
                 }
             } else {
@@ -131,8 +152,20 @@ import './xnnumberturner.css'
         `
             }
             this.cont.innerHTML = innerHtml;
-
+            this.isrunning=0;
             for (let i = 0; i < this.arry.length; i++) {
+                if (!$.isNumber(this.arry[i])) {
+                    continue;
+                }
+                else{
+                    this.isrunning++;
+                }
+            }
+            console.log(this.isrunning)
+            for (let i = 0; i < this.arry.length; i++) {
+                if (!$.isNumber(this.arry[i])) {
+                    continue;
+                }
                 this.turnNumber(this.arry[i], i)
             }
             this.setItemCss();
@@ -209,9 +242,7 @@ import './xnnumberturner.css'
             this['linerChangeturnAnimate'](dom, turnStep, currentIndex, dir, dirnum);
         },
         turnNumber(dirnum, key) {
-            if (!$.isNumber(dirnum)) {
-                return;
-            }
+
             let dom = this.dom.querySelector(".number-turner-item[data-key='" + key + "']>div")
             let currentIndex = parseInt(dom.querySelector(".current-number").innerHTML);
             let turnStep = currentIndex - dirnum;
@@ -259,24 +290,28 @@ import './xnnumberturner.css'
             }, this.option.animate.totalTime / 10)
         },
         linerUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum,cursleepTime,curTime) {
-            return;
+            // return;
             var curHeight=0;
+            var rid=null;
+            var dirStep=currentIndex - dirnum;
             var animate1=()=>{
+                // this.isrunning=true;
                 if (currentIndex == dirnum) {
+                    cancelAnimationFrame(rid)
+                    this.isrunning--;
+                    if(this.isrunning<=0){
+                        this.trigger('update');
+                    }
                     return;
                 }
-                console.log(1)
                 var sleepTimeLength=new Date().getTime()-cursleepTime;
                 if(sleepTimeLength>=this.option.animate.sleepTime){
-                    // cursleepTime=new Date().getTime();
-                    var timeLength=new Date().getTime()-curTime-this.option.animate.sleepTime;
-                    if(timeLength<this.option.animate.speedTimeLength){
-
-                        var curheight=parseInt(dom.style.top || 0) + dir;
-                        dom.style.top = curheight + 'px';
-                        // console.log(curheight)
-                        curHeight++;
+                    var timeLength=sleepTimeLength-this.option.animate.sleepTime;
+                    curHeight+=parseInt(this.option.animate.step);
+                    var curheight=parseInt(dom.style.top || 0) + parseInt(this.option.animate.step)*dir;
+                    dom.style.top = curheight + 'px';
                         if (curHeight >= this.option.css.height) {
+                            dom.style.top = curheight+(curHeight-this.option.css.height) + 'px';
                             cursleepTime=new Date().getTime();
                             curTime=new Date().getTime()
                             curHeight=0;
@@ -285,14 +320,24 @@ import './xnnumberturner.css'
                             if (currentIndex != dirnum) {
                                 // this.linerUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum);
                             } else {
+                                dom.style.top = -(dirnum*this.option.css.height) + 'px';
                                 dom.querySelector(".current-number").classList.remove("current-number");
                                 dom.querySelector(".number" + dirnum).classList.add("current-number");
                                 cancelAnimationFrame(rid)
+                                // this.rids.splice(this.rids.indexOf(rid));
+                                // this.isrunning--;
+                                // console.log(this.isrunning)
+                                // if(this.isrunning<=0){
+                                //     this.trigger('update');
+                                // }
                             }
                         }
-                    }
                 }
-                var rid=requestAnimationFrame(animate1)
+                this.rids.splice(this.rids.indexOf(rid));
+                // console.log(rid)
+                rid=requestAnimationFrame(animate1)
+                // console.log(rid)
+                this.rids.push(rid)
             }
             animate1()
             // window.setTimeout(() => {
@@ -335,11 +380,41 @@ import './xnnumberturner.css'
         updateNumber(number) {
             let newArry = String(number).split('').reverse();
             this.arry = newArry;
-            this[this.option.type + 'Update']();
+            console.log(this.isrunning)
+            if(this.isrunning>0){
+                this.on('update',this[this.option.type + 'Update'].bind(this),true)
+            }
+            else{
+                this[this.option.type + 'Update']();
+            }
         },
         _getDecimalLength(n) {
             return n.toString().split(".")[1] ? n.toString().split(".")[1].length : 0;
-        }
+        },
+        on: function (type, func, refresh) {
+            if (!this.eventList[type]) {
+                this.eventList[type] = {
+                    listener: [func]
+                }
+            } else {
+                if (refresh) {
+                    this.eventList[type].listener = [func]
+                } else {
+                    this.eventList[type].listener.push(func)
+                }
+            }
+        },
+        trigger: function (type) {
+            if (!this.eventList[type]) {
+                return;
+            }
+            for (let i = 0; i < this.eventList[type].listener.length; i++) {
+                let listener = this.eventList[type].listener[i];
+                if (typeof listener == 'function') {
+                    listener(arguments[1], this.dom)
+                }
+            }
+        },
 
     }
     window.XNNumberTuner = XNNumberTuner;

@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<!--    <link rel="stylesheet" href="fcolorpicker.css">-->
+    <!--    <link rel="stylesheet" href="fcolorpicker.css">-->
     <style>
-        body{
+        body {
             background: #eee;
         }
-        .container>div{
+
+        .container > div {
             margin: 20px;
             border-bottom: 1px solid #ccc;
             padding-bottom: 20px;
         }
-        .container>div a{
+
+        .container > div a {
             cursor: pointer;
             color: blue;
             margin-bottom: 10px;
@@ -22,33 +24,58 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h3>仙女座-数字翻转动效</h3>
-        <div>
-            <a class="update" data-key="linerUp">linerUp-更新数字</a>
-            <div class="linerUp"></div>
-        </div>
-        <div>
-            <a class="update" data-key="sameTimeUp">sameTimeUp-更新数字</a>
-            <div class="sameTimeUp"></div>
-        </div>
-        <div>
-            <a class="update" data-key="linerChange">linerChange-更新数字</a>
-            <div class="linerChange"></div>
-        </div>
-        <div>
-            <a class="update" data-key="sameTimeChange">sameTimeChange-更新数字</a>
-            <div class="sameTimeChange"></div>
-        </div>
-        <div>
-            <a class="update" data-key="easyChange">easyChange-更新数字</a>
-            <div class="easyChange"></div>
-        </div>
+<div class="container">
+    <h3>仙女座-数字翻转动效</h3>
+    <div>
+        <a class="update" data-key="linerUp">linerUp-更新数字</a>
+        <div class="linerUp"></div>
     </div>
+    <div>
+        <a class="update" data-key="sameTimeUp">sameTimeUp-更新数字</a>
+        <div class="sameTimeUp"></div>
+    </div>
+    <div>
+        <a class="update" data-key="linerChange">linerChange-更新数字</a>
+        <div class="linerChange"></div>
+    </div>
+    <div>
+        <a class="update" data-key="sameTimeChange">sameTimeChange-更新数字</a>
+        <div class="sameTimeChange"></div>
+    </div>
+    <div>
+        <a class="update" data-key="easyChange">easyChange-更新数字</a>
+        <div class="easyChange"></div>
+    </div>
+</div>
 </body>
 <script src="./dist/xnnumberturner.min.js"></script>
 <script>
-    var linerUp=new XNNumberTuner(document.querySelector(".linerUp"),{"type":"linerUp","animate":{"speedTimeLength":200,"sleepTime":1000,"totalTime":2000},"css":{"height":"56","backgroundColor":"#efefef","borderColor":"#125ce9","borderWidth":2,"borderStyle":"solid","backgroundImage":"","backgroundSize":"auto","width":"35","textAlign":"center","marginRight":4,"borderRadius":4,"fontSize":22,"fontFamily":"fantasy","color":"rgba(11,59,235,1)"},"number":923})
+    var linerUp = new XNNumberTuner(document.querySelector(".linerUp"), {
+        "type": "linerUp",
+        "animate": {
+            "speedTimeLength": 200,
+            "sleepTime": 10,
+            "step": 5
+        },
+        "css": {
+            "height": "56",
+            "backgroundColor": "#efefef",
+            "borderColor": "#125ce9",
+            "borderWidth": 2,
+            "borderStyle": "solid",
+            "backgroundImage": "",
+            "backgroundSize": "auto",
+            "width": "35",
+            "textAlign": "center",
+            "marginRight": 4,
+            "borderRadius": 4,
+            "fontSize": 22,
+            "fontFamily": "fantasy",
+            "color": "rgba(11,59,235,1)"
+        },
+        "number": 8,
+    })
+
     // var sameTimeUp=new XNNumberTuner(document.querySelector(".sameTimeUp"),{
     //     type:'sameTimeUp',//
     //     // linerUp：匀速向上翻转，
@@ -99,19 +126,19 @@
     //     },
     //     number:'323'
     // })
-    // var newArry=['91,578','92,987','102,011'];
-    // var index=0;
-    // document.querySelectorAll(".update").forEach(ele=>{
-    //     ele.addEventListener("click",e=>{
-    //         var newNumber=newArry[index];
-    //         index+=1;
-    //         if(index>newArry.length-1){
-    //             index=0;
-    //         }
-    //         var key=e.target.getAttribute('data-key')
-    //         window[key].updateNumber(newNumber)
-    //     })
-    // })
+    var newArry=['9','5','102,011'];
+    var index=0;
+    document.querySelectorAll(".update").forEach(ele=>{
+        ele.addEventListener("click",e=>{
+            var newNumber=newArry[index];
+            index+=1;
+            if(index>newArry.length-1){
+                index=0;
+            }
+            var key=e.target.getAttribute('data-key')
+            window[key].updateNumber(newNumber)
+        })
+    })
 
 </script>
 </html>
