@@ -111,7 +111,9 @@ import './xnnumberturner.css'
                 // for (let i = 0; i < this.arry.length; i++) {
                 //     this.turnNumber(this.arry[i], i)
                 // }
-
+                if(this.isrunning>0){
+                    return;
+                }
                 this.isrunning=0;
                 for (let i = 0; i < this.arry.length; i++) {
                     if (!$.isNumber(this.arry[i])) {
@@ -292,6 +294,9 @@ import './xnnumberturner.css'
         },
         linerUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum,cursleepTime,curTime) {
             // return;
+            // if (currentIndex == dirnum) {
+            //
+            // }
             var curHeight=0;
             var rid=null;
             var dirStep=currentIndex - dirnum;
@@ -300,7 +305,7 @@ import './xnnumberturner.css'
                 if (currentIndex == dirnum) {
                     cancelAnimationFrame(rid)
                     this.isrunning--;
-                    if(this.isrunning<=0){
+                    if(this.isrunning<=0 && rid){
                         this.trigger('update');
                     }
                     return;
@@ -324,21 +329,10 @@ import './xnnumberturner.css'
                                 dom.style.top = -(dirnum*this.option.css.height) + 'px';
                                 dom.querySelector(".current-number").classList.remove("current-number");
                                 dom.querySelector(".number" + dirnum).classList.add("current-number");
-                                cancelAnimationFrame(rid)
-                                // this.rids.splice(this.rids.indexOf(rid));
-                                // this.isrunning--;
-                                // console.log(this.isrunning)
-                                // if(this.isrunning<=0){
-                                //     this.trigger('update');
-                                // }
                             }
                         }
                 }
-                this.rids.splice(this.rids.indexOf(rid));
-                // console.log(rid)
                 rid=requestAnimationFrame(animate1)
-                // console.log(rid)
-                this.rids.push(rid)
             }
             animate1()
             // window.setTimeout(() => {
