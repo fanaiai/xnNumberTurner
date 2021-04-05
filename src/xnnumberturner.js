@@ -144,11 +144,13 @@ import './xnnumberturner.css'
             }
             for (let i = 0; i < this.arry.length; i++) {
                 let t = numberlist;
+                let itemclass='';
                 if (!$.isNumber(this.arry[i])) {
+                    itemclass='not-number'
                     t = `<p>${this.arry[i]}</p>`;
                 }
                 innerHtml += `
-        <div class="number-turner-item" data-key="${i}"><div>${t}</div></div>
+        <div class="number-turner-item ${itemclass}" data-key="${i}"><div>${t}</div></div>
         `
             }
             this.cont.innerHTML = innerHtml;
@@ -161,7 +163,6 @@ import './xnnumberturner.css'
                     this.isrunning++;
                 }
             }
-            console.log(this.isrunning)
             for (let i = 0; i < this.arry.length; i++) {
                 if (!$.isNumber(this.arry[i])) {
                     continue;
