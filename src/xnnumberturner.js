@@ -292,6 +292,15 @@ import './xnnumberturner.css'
                 }
             }, this.option.animate.totalTime / 10)
         },
+        getTransform(t){
+            let translate = document.defaultView.getComputedStyle(t,null).transform.split(', ')
+            let top = parseFloat(translate[translate.length - 1])||0;
+            return top;
+        },
+        setTransform($t,translateTop){
+            // console.log(translateTop);
+            $t.css({transform: 'translateY(' + translateTop + 'px)'})
+        },
         linerUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum,cursleepTime,curTime) {
             // return;
             // if (currentIndex == dirnum) {
@@ -314,10 +323,14 @@ import './xnnumberturner.css'
                 if(sleepTimeLength>=this.option.animate.sleepTime){
                     var timeLength=sleepTimeLength-this.option.animate.sleepTime;
                     curHeight+=parseInt(this.option.animate.step);
-                    var curheight=parseInt(dom.style.top || 0) + parseInt(this.option.animate.step)*dir;
-                    dom.style.top = curheight + 'px';
+                    let top=this.getTransform(dom)
+                    var curheight=parseInt(top) + parseInt(this.option.animate.step)*dir;
+                    // dom.style.top = curheight + 'px';
+                    // console.log(curheight);
+                    this.setTransform($(dom),curheight)
                         if (curHeight >= this.option.css.height) {
-                            dom.style.top = curheight+(curHeight-this.option.css.height) + 'px';
+                            // dom.style.top = curheight+(curHeight-this.option.css.height) + 'px';
+                            this.setTransform($(dom),curheight+(curHeight-this.option.css.height))
                             cursleepTime=new Date().getTime();
                             curTime=new Date().getTime()
                             curHeight=0;
@@ -326,7 +339,8 @@ import './xnnumberturner.css'
                             if (currentIndex != dirnum) {
                                 // this.linerUpturnAnimate(dom, turnStep, currentIndex, dir, dirnum);
                             } else {
-                                dom.style.top = -(dirnum*this.option.css.height) + 'px';
+                                // dom.style.top = -(dirnum*this.option.css.height) + 'px';
+                                this.setTransform($(dom),-(dirnum*this.option.css.height))
                                 dom.querySelector(".current-number").classList.remove("current-number");
                                 dom.querySelector(".number" + dirnum).classList.add("current-number");
                             }
