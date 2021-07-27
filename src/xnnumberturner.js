@@ -249,6 +249,8 @@ import './xnnumberturner.css'
             let dom = this.dom.querySelector(".number-turner-item[data-key='" + key + "']>div")
             let currentIndex = parseInt(dom.querySelector(".current-number").innerHTML);
             let turnStep = currentIndex - dirnum;
+            turnStep=turnStep==0?10:turnStep;
+            console.log(turnStep);
             let dir = turnStep > 0 ? 1 : -1;
             let curTime=new Date().getTime();
             this[this.option.type + 'turnAnimate'](dom, turnStep, currentIndex, dir, dirnum,curTime,curTime);

@@ -73,21 +73,21 @@
             "fontFamily": "fantasy",
             "color": "rgba(11,59,235,1)"
         },
-        "number": 8,
+        "number": 188,
     })
 
-    // var sameTimeUp=new XNNumberTuner(document.querySelector(".sameTimeUp"),{
-    //     type:'sameTimeUp',//
-    //     // linerUp：匀速向上翻转，
-    //     // sameTimeUp：总时间相同向上翻转，
-    //     // linerChange:每个位数匀速数字变化，
-    //     // sameTimeChange:总时长相同数字变化,
-    //     // easyChange:普通从最小值向上变
-    //     animate:{
-    //         totalTime: 2000,//总时长
-    //     },
-    //     number:'9'
-    // })
+    var sameTimeUp=new XNNumberTuner(document.querySelector(".sameTimeUp"),{
+        type:'sameTimeUp',//
+        // linerUp：匀速向上翻转，
+        // sameTimeUp：总时间相同向上翻转，
+        // linerChange:每个位数匀速数字变化，
+        // sameTimeChange:总时长相同数字变化,
+        // easyChange:普通从最小值向上变
+        animate:{
+            totalTime: 2000,//总时长
+        },
+        number:'9'
+    })
     // var linerChange=new XNNumberTuner(document.querySelector(".linerChange"),{
     //     type:'linerChange',//
     //     // linerUp：匀速向上翻转，
@@ -126,7 +126,7 @@
     //     },
     //     number:'323'
     // })
-    var newArry=['9','5','1'];
+    var newArry=['188','5','1'];
     var index=0;
     document.querySelectorAll(".update").forEach(ele=>{
         ele.addEventListener("click",e=>{
